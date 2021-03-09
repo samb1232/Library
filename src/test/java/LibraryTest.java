@@ -66,7 +66,7 @@ public class LibraryTest {
     public void ShouldThrowsInvalidId() {
         assertThrows(InvalidKeyException.class, () -> {
             Library testLib = new Library();
-            int bookId = testLib.addBook("Война и мир. Том 1", "Л.Н. Толстой", "Роман", "A1");
+            testLib.addBook("Война и мир. Том 1", "Л.Н. Толстой", "Роман", "A1");
             testLib.getBookById(77);
         });
     }
@@ -74,10 +74,10 @@ public class LibraryTest {
     @Test
     public void ShouldFindBook() throws InvalidKeyException {
         Library testLib = new Library();
-        int bookId1 = testLib.addBook("Война и мир. Том 1", "Л.Н. Толстой", "Роман", "A1");
-        int bookId2 = testLib.addBook("Война и мир. Том 2", "Л.Н. Толстой", "Роман", "B2");
-        int bookId3 = testLib.addBook("Война и мир. Том 3", "Л.Н. Толстой", "Роман", "B2");
-        int bookId4 = testLib.addBook("Капитанская дочка", "А.Н. Пушкин", "Роман", "C1");
+        testLib.addBook("Война и мир. Том 1", "Л.Н. Толстой", "Роман", "A1");
+        testLib.addBook("Война и мир. Том 2", "Л.Н. Толстой", "Роман", "B2");
+        testLib.addBook("Война и мир. Том 3", "Л.Н. Толстой", "Роман", "B2");
+        testLib.addBook("Капитанская дочка", "А.Н. Пушкин", "Роман", "C1");
         assertEquals(3, testLib.findBook("Война и мир", null, null, null).size());
         assertEquals(2, testLib.findBook("Война и мир", null, null, "B2").size());
         assertEquals(1, testLib.findBook("тан", null, "Роман", null).size());
