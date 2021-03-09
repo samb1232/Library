@@ -27,19 +27,21 @@ public class Library {
         }
     }
 
-    public void addBook(Book book) {
+    public int addBook(Book book) {
         /* Добавляет книгу в библиотеку */
+        // Возвращает int для того чтобы после того как добавить книгу, не искать её id отдельно
         if (book == null) {
             throw new IllegalArgumentException("Book is not defined");
         }
         lib.put(id, book);
         book.changeId(id);
         id++;
+        return book.getId();
     }
 
-    public void addBook(String name, String author, String genre, String shelf) throws InvalidKeyException {
+    public int addBook(String name, String author, String genre, String shelf) throws InvalidKeyException {
         /* Создает и добавляет книгу в библиотеку */
-        addBook(new Book(name, author, genre, shelf));
+        return addBook(new Book(name, author, genre, shelf));
     }
 
     public void moveBook(int id, String newShelf) throws InvalidKeyException {
@@ -51,7 +53,7 @@ public class Library {
         /* Изменяет описание книги */
         Book bookToChange = getBookById(id);
         if (newName != null) bookToChange.changeName(newName);
-        if (newAuthor != null) bookToChange.changeAuthor(newName);
+        if (newAuthor != null) bookToChange.changeAuthor(newAuthor);
         if (newGenre != null) bookToChange.changeGenre(newGenre);
     }
 
@@ -72,14 +74,14 @@ public class Library {
         }
     }
 
-    public int getIdByBook(String name, String author, String genre, String shelf) {
+    public int getIdByBook(String name, String author, String genre, String shelf) throws InvalidKeyException {
         /* Возвращает id книги */
         HashMap<Integer, Book> foundedBooks = findBook(name, author, genre, shelf);
         for (int i : foundedBooks.keySet()) {
             //Возвращает самый первый элемент из hashMap, я ещё не придумал как это покрасивее сделать
             return i;
         }
-        return -1; //Если не нашёл нужный id, нужно что-то сделать
+        throw new InvalidKeyException("Book with such properties is not found");
     }
 
     public Book getBookById(int id) throws InvalidKeyException {

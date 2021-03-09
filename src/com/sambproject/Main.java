@@ -12,7 +12,7 @@ public class Main {
         libOne.addBook(new Book ("Война и мир. Том 3", "Л.Н. Толстой", "Роман", "АА4"));
         libOne.deleteBook(1);
         libOne.addBook(new Book ("Война и мир. Том 4", "Л.Н. Толстой", "Роман", "В1"));
-        libOne.moveBook(libOne.getIdByBook("Война и мир. Том 4", null, null, null), "C1");
+        libOne.moveBook(libOne.getIdByBook("Война и миjgjkgiuр. Том 4", null, null, null), "C1");
 
         libOne.showAllBooks();
     }
