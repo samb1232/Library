@@ -77,11 +77,10 @@ public class Library {
     public int getIdByBook(String name, String author, String genre, String shelf) throws InvalidKeyException {
         /* Возвращает id книги */
         HashMap<Integer, Book> foundedBooks = findBook(name, author, genre, shelf);
-        for (int i : foundedBooks.keySet()) {
-            //Возвращает самый первый элемент из hashMap, я ещё не придумал как это покрасивее сделать
-            return i;
+        if (foundedBooks.size() != 1) {
+            throw new InvalidKeyException("Book with such properties is not found");
         }
-        throw new InvalidKeyException("Book with such properties is not found");
+        return foundedBooks.keySet().iterator().next();
     }
 
     public Book getBookById(int id) throws InvalidKeyException {
@@ -124,7 +123,7 @@ public class Library {
         HashMap<Integer, Book> localLib = new HashMap<>();
         for (int keyBook : lib.keySet()) {
             Book bookInstance = lib.get(keyBook);
-            if (bookInstance.getShelf().contains(shelf)) {
+            if (bookInstance.getShelf().equals(shelf)) {
                 localLib.put(bookInstance.getId(), bookInstance);
             }
         }
